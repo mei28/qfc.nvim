@@ -11,7 +11,7 @@
 
 ```
 {
-  'your-github-username/qfc.nvim',
+  'mei28/qfc.nvim',
   config = function()
     require('qfc').setup({
       timeout = 3000,   -- Timeout setting in milliseconds
