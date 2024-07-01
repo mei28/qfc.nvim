@@ -9,7 +9,7 @@
 
 ## Installation
 
-```
+```lua
 {
   'mei28/qfc.nvim',
   config = function()
