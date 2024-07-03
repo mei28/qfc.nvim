@@ -1,5 +1,7 @@
 # qfc.nvim
 
+![qfc](https://github.com/mei28/qfc.nvim/assets/51149822/2997f892-d2ba-40ae-9870-d52fdbc45deb)
+
 `qfc.nvim` is a Neovim plugin that automatically manages Quickfix windows. It closes the Quickfix window after a specified timeout when the window loses focus and deletes the buffer.
 
 ## Features
