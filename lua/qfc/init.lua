@@ -2,12 +2,14 @@ local M = {}
 
 -- Default configuration
 M.config = {
-  timeout = 3000,   -- Default timeout of 2000 milliseconds
+  timeout = 3000,   -- Default timeout of 3000 milliseconds
   autoclose = true, -- Enable autoclose by default
 }
 
--- Function to start a timer to auto close Quickfix
+-- Timer to handle auto close
 local timer = vim.loop.new_timer()
+
+-- Function to start the timer
 function M.start_qf_timer()
   if vim.bo.buftype == 'quickfix' and M.config.autoclose then
     local bufnr = vim.fn.bufnr()
@@ -25,6 +27,13 @@ function M.start_qf_timer()
   end
 end
 
+-- Function to stop the timer
+function M.stop_qf_timer()
+  if timer:is_active() then
+    timer:stop()
+  end
+end
+
 -- Setup function to allow user configuration
 function M.setup(user_config)
   M.config = vim.tbl_deep_extend('force', M.config, user_config or {})
@@ -33,10 +42,20 @@ function M.setup(user_config)
   vim.api.nvim_create_autocmd('WinLeave', {
     pattern = '*',
     callback = function()
-      M.start_qf_timer()
+      if vim.bo.buftype == 'quickfix' then
+        M.start_qf_timer()
+      end
+    end,
+  })
+
+  vim.api.nvim_create_autocmd('WinEnter', {
+    pattern = '*',
+    callback = function()
+      if vim.bo.buftype == 'quickfix' then
+        M.stop_qf_timer()
+      end
     end,
   })
 end
 
 return M
-
