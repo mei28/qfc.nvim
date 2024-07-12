@@ -18,13 +18,14 @@
   config = function()
     require('qfc').setup({
       timeout = 3000,   -- Timeout setting in milliseconds
-      autoclose = true, -- Enable/disable autoclose feature
+      enabled = true, -- Enable/disable autoclose feature
     }),
    -- ft = 'qf', -- for lazy load
-   -- cmd = {'EnableQFC', 'DisableQFC', 'ToggleQFC'} -- for lazy load 
+   -- cmd = {'QFC'} -- for lazy load 
   end
 }
 ```
+
 
 ## Configuration
 
@@ -32,17 +33,18 @@
 require('qfc').setup({
   timeout = 2000,   -- Timeout setting in milliseconds
   enabled = true, -- Enable/disable autoclose feature
+
 })
 ```
 
 ### Configuration Options
-* timeout: Specifies the timeout in milliseconds after which the Quickfix window will be automatically closed once it loses focus.
-* enabled: Enables or disables the plugin. Set to true to enable or false to disable.
+* `timeout`: Specifies the timeout in milliseconds after which the Quickfix window will be automatically closed once it loses focus.
+* `enabled`: Enables or disables the plugin. Set to true to enable or false to disable.
  
 ### Commands
-* `:EnableQFC` Enables the Quickfix autoclose feature.
-* `:DisableQFC` Disables the Quickfix autoclose feature.
-* `:ToggleQFC` toggle the Quickfix autoclose feature.
+* `:QFC enable` Enables the Quickfix autoclose feature.
+* `:QFC disable` Disables the Quickfix autoclose feature.
+* `:QFC toggle` toggle the Quickfix autoclose feature.
 
 ## License
 
