@@ -1,16 +1,23 @@
 local config = {}
 
 config.settings = {
-  timeout = 3000, -- Default timeout of 3000 milliseconds
-  enabled = true, -- Enable the plugin by default
+  timeout = 3000, -- default time to close(ms)
+  enabled = true, -- enable auto close
+
+  targets = {
+    {
+      buftype = "quickfix",
+      timeout = 3000,
+    },
+  },
 }
 
--- Function to get the path for the config file
+-- Path to save settings to file
 local function get_config_path()
   return vim.fn.stdpath('data') .. '/qfc_cache'
 end
 
--- Function to save the current configuration to a file
+-- save settings to file
 local function save_config()
   local config_path = get_config_path()
   local file = io.open(config_path, "w")
@@ -22,7 +29,7 @@ local function save_config()
   end
 end
 
--- Function to load the configuration from a file
+-- load settings from setting file 
 local function load_config()
   local config_path = get_config_path()
   local file = io.open(config_path, "r")
@@ -35,7 +42,6 @@ local function load_config()
       config.settings.enabled = false
     end
   else
-    -- If the file does not exist, save the default configuration
     save_config()
   end
 end
@@ -61,3 +67,4 @@ function config.toggle()
 end
 
 return config
+

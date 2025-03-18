@@ -6,7 +6,7 @@
 
 ## Features
 
-- Automatically closes the Quickfix window a specified time after it loses focus.
+- This plugin automatically closes certain windows (by default, Quickfix) after leaving them for a specified timeout.  
 - Deletes the Quickfix buffer after closing the window.
 - Retains the plugin state between Neovim sessions.
 
@@ -19,6 +19,12 @@
     require('qfc').setup({
       timeout = 3000,   -- Timeout setting in milliseconds
       enabled = true, -- Enable/disable autoclose feature
+      targets = {
+          {
+            buftype = "quickfix", -- Quickfix
+            timeout = 3000,       -- ms
+          },
+      }
     }),
    -- ft = 'qf', -- for lazy load
    -- cmd = {'QFC'} -- for lazy load 
@@ -33,6 +39,20 @@
 require('qfc').setup({
   timeout = 2000,   -- Timeout setting in milliseconds
   enabled = true, -- Enable/disable autoclose feature
+  targets = {
+      {
+        buftype = "quickfix", -- Quickfix
+        timeout = 3000,       -- ms
+      },
+      {
+        filetype = "qf",      -- Quickfix
+        timeout = 3000,       -- ms
+      }, 
+      {
+        filetype = "undotree",-- undotree
+        timeout = 5000,       -- ms
+      }, 
+  }
 
 })
 ```
@@ -40,6 +60,9 @@ require('qfc').setup({
 ### Configuration Options
 * `timeout`: Specifies the timeout in milliseconds after which the Quickfix window will be automatically closed once it loses focus.
 * `enabled`: Enables or disables the plugin. Set to true to enable or false to disable.
+* `targets`: targets: A list of tables specifying which windows to close. You can match by:
+    * `buftype` = "quickfix", "help", etc.
+    * `filetype` = "undotree", "Outline", etc.
  
 ### Commands
 * `:QFC enable` Enables the Quickfix autoclose feature.
